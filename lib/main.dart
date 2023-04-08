@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:gis_axiom_test/routes/route_name.dart';
 
-import 'src/views/home/list_screen.dart';
+import 'routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
         // "hot reload" (press "r" in the console where you ran "flutter run",
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
+        // is not restarted. getPages: RoutesPages.routes,
         primarySwatch: Colors.blue,
       ),
-      home: ListScreen(),
+      getPages: RoutesPages.routes,
+      initialRoute: RouteNames.homeList,
     );
   }
 }
