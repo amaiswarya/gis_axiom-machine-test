@@ -36,7 +36,7 @@ class MenuDetails extends StatelessWidget {
             : GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 0.60,
+                    childAspectRatio: 0.55,
                     mainAxisSpacing: 5,
                     crossAxisSpacing: 10,
                     crossAxisCount: 2),

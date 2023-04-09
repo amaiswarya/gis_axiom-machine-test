@@ -10,11 +10,9 @@ class HttpServices {
       final response = await http.post(url, body: params);
       var responseJson = json.decode(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // print(response);
         return responseJson;
       } else {
-        AppToast.showToast(responseJson["message"]);
-        // print(response.toString());
+        AppToast.showToast("Something went wrong");
         return null;
       }
     } on SocketException {
