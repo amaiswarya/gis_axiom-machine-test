@@ -9,8 +9,9 @@ class HomeController extends GetxController {
   HomeController() {
     service = Get.find<HttpServices>();
   }
-  List<MenuItem> menunList = <MenuItem>[].obs;
+  List<MenuItem> menuList = <MenuItem>[].obs;
   List<Website> webSiteData = <Website>[].obs;
+  RxString pageTitle = "".obs;
 
   @override
   void onInit() {
@@ -26,7 +27,8 @@ class HomeController extends GetxController {
     if (response != null) {
       RestaurantModel restaurantSata = RestaurantModel.fromJson(response);
       webSiteData.add(restaurantSata.website);
-      menunList = restaurantSata.menuItems;
+      pageTitle.value = restaurantSata.pageTitle;
+      menuList = restaurantSata.menuItems;
 
       hideLoading();
     } else {
@@ -34,6 +36,7 @@ class HomeController extends GetxController {
     }
   }
 
+// display loader while loading the data
   showLoading() {
     isLoading.value = true;
     Future.delayed(const Duration(seconds: 10), () {
@@ -44,6 +47,7 @@ class HomeController extends GetxController {
     });
   }
 
+// hides the loader after loading the data
   hideLoading() {
     isLoading.value = false;
     update();

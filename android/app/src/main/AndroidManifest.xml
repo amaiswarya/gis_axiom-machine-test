@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gis_axiom_test">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="gis_axiom_test"
         android:name="${applicationName}"
