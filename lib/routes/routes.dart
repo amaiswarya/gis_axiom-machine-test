@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
 import 'package:gis_axiom_test/routes/route_name.dart';
 import 'package:gis_axiom_test/src/views/home/list_screen.dart';
-import 'package:gis_axiom_test/src/views/home/menu_details.dart';
 import 'package:gis_axiom_test/src/views/splash/splash_screen.dart';
-
 import 'bindings.dart';
 
 const duration = Duration(milliseconds: 500);
@@ -21,14 +19,7 @@ class RoutesPages {
     //list screen
     GetPage(
         name: RouteNames.homeList,
-        page: () => const ListScreen(),
-        transition: transition,
-        transitionDuration: duration,
-        binding: HomeBinding()),
-    // detailPage
-    GetPage(
-        name: RouteNames.homeList,
-        page: () => const MenuDetails(),
+        page: () => ListScreen(),
         transition: transition,
         transitionDuration: duration,
         binding: HomeBinding()),

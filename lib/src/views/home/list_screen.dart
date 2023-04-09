@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gis_axiom_test/routes/bindings.dart';
 
 import '../../controller/home_controller.dart';
 import 'menu_details.dart';
 
-class ListScreen extends StatefulWidget {
-  const ListScreen({super.key});
+class ListScreen extends StatelessWidget {
+  ListScreen({super.key});
 
-  @override
-  State<ListScreen> createState() => _ListScreenState();
-}
-
-class _ListScreenState extends State<ListScreen> {
   final controller = Get.find<HomeController>();
 
   @override
@@ -29,55 +23,69 @@ class _ListScreenState extends State<ListScreen> {
                       //
 
                       ))
-              : Column(children: [
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    color: Colors.green,
-                    child: Column(children: [
-                      Text("Name"),
-                      Text("Address"),
-                      Text("Location"),
-                      Text("Phone number"),
-                      Text("Email"),
-                    ]),
-                  ),
-                  Expanded(
-                      child: Container(
-                    color: Colors.red,
-                    child: ListView.builder(
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(MenuDetails());
-                            },
-                            child: Card(
-                              child: Container(
-                                height: 100,
-                                child: Row(children: [
-                                  Container(
-                                    width: 100,
-                                    color: Colors.blue,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("Name"),
-                                      Text("Address"),
-                                      Text("Location"),
-                                      Text("Phone number"),
-                                    ],
-                                  )
-                                ]),
-                              ),
-                            ),
-                          );
-                        }),
-                  ))
-                ])),
+              : controller.webSiteData.isEmpty
+                  ? Center(
+                      child: Text("Data not found"),
+                    )
+                  : Column(children: [
+                      Container(
+                        height: 200,
+                        width: double.infinity,
+                        color: Colors.green,
+                        child: Column(children: [
+                          Text(controller.webSiteData[0].phone),
+                          Text("Address"),
+                          Text("Location"),
+                          Text("Phone number"),
+                          Text("Email"),
+                        ]),
+                      ),
+                      Expanded(
+                          child: Container(
+                        color: Colors.red,
+                        child: controller.menunList.isEmpty
+                            ? Center(
+                                child: Text("Data not found"),
+                              )
+                            : ListView.builder(
+                                itemCount: controller.menunList.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.to(MenuDetails(
+                                        products: controller
+                                            .menunList[index].products,
+                                      ));
+                                    },
+                                    child: Card(
+                                      child: Container(
+                                        height: 100,
+                                        child: Row(children: [
+                                          Container(
+                                            width: 100,
+                                            color: Colors.blue,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(controller
+                                                  .menunList[index].name),
+                                              Text(controller
+                                                  .menunList[index].sliderDesc),
+                                              Text("Location"),
+                                              Text("Phone number"),
+                                            ],
+                                          )
+                                        ]),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                      ))
+                    ])),
     );
   }
 }
